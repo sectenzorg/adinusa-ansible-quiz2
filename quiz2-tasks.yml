@@ -1,0 +1,35 @@
+- name: Create user accounts for managed1
+  hosts: managed1-host-abdillahsyarip
+  become: true
+
+  vars_files:
+    - secret.yml
+  tasks:
+    - name: Create ops users managed1
+      user:
+        name: "{{item}}"
+        password: "{{pass | password_hash('sha512')}}"
+      loop: "{{list_user_ops_managed1}}"
+    - name: Create dev users managed1
+      user:
+        name: "{{item}}"    
+        password: "{{pass | password_hash('sha512')}}"
+      loop: "{{list_user_dev_managed1}}"
+
+- name: Create user accounts for managed2
+  hosts: managed2-host-abdillahsyarip
+  become: true
+
+  vars_files:
+    - secret.yml
+  tasks:
+    - name: Create ops users managed2
+      user:
+        name: "{{item}}"
+        password: "{{pass | password_hash('sha512')}}"
+      loop: "{{list_user_ops_managed2}}"
+    - name: Create dev users managed2
+      user:
+        name: "{{item}}"
+        password: "{{pass | password_hash('sha512')}}"
+      loop: "{{list_user_dev_managed2}}"

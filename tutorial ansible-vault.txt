@@ -1,0 +1,4 @@
+ansible-vault encrypt secret.yml
+echo 'belajaransible' > vault-pass
+chmod 600 vault-pass
+ansible-playbook --vault-password-file=vault-pass quiz2-tasks.yml
